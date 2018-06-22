@@ -68,7 +68,7 @@
     },
     created() {
       this.user = JSON.parse(localStorage.getItem(config.LOCAL_STORAGE.USER))
-      if (!user) {
+      if (!this.user) {
         this.$router.push('/login')
         location.reload()
       }
