@@ -12,8 +12,8 @@ export const getRoutes = (userRoutes, routes) => {
   // 开始循环设置路由参数props及子路由children
   for (let level = 1; level <= maxLevel; level++) {
     let currentLevelRoutes = getRoutesByLevel(userRoutes, routes, level)
+    setPropsOfRoutesByUserRoutes(userRoutes, currentLevelRoutes)
     currentLevelRoutes.forEach(route => {
-      setPropsOfRoutesByUserRoutes(userRoutes, currentLevelRoutes)
       getRoutesByParentName(userRoutes, routes, route.name).forEach(children => {
         route.children.push(children)
       })
@@ -46,10 +46,11 @@ export const getRoutesByLevel = (userRoutes, routes, level) => {
 * 获取userRoutes中所有名称的路由
 * */
 export const getRoutesByUserRoutes = (userRoutes, routes) => {
+  let userRoutesName = userRoutes.map(routeOfUser => {
+    return routeOfUser[config.LOCAL_STORAGE.USER_VALUE.ROUTES_VALUE.NAME]
+  })
   return routes.filter(route => {
-    return userRoutes.map(routeOfUser => {
-      return routeOfUser[config.LOCAL_STORAGE.USER_VALUE.ROUTES_VALUE.NAME]
-    }).includes(route.name)
+    return userRoutesName.includes(route.name)
   })
 }
 

@@ -36,6 +36,11 @@ export default {
       USER_TOKEN: 'user-token',
       USERNAME: 'username',
       ROUTES: 'routes',
+      ID: 'id',
+      DESCRIPTION: 'description',
+      EMAIL: 'email',
+      PHONE_NUMBER: 'phoneNumber',
+      LAST_LOGIN: 'lastLogin',
 
       // routes中包含的字段
       ROUTES_VALUE: {

@@ -1,7 +1,7 @@
 import axios from '../../../config/axios'
 import qs from 'qs'
 
-export const get = () => {
+export const get = (name) => {
   return axios.get('/route/?' + qs.stringify({name}))
 }
 

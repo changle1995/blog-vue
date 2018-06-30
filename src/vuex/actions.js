@@ -10,13 +10,12 @@ export const login = ({commit, state, dispatch}, {username, password, router}) =
   return new Promise((resolve, reject) => {
     requestLogin(username, password)
       .then(response => {
-        let restResponse = response.data
-        if (restResponse[config.RESPONSE.CODE] === config.RESPONSE.CODE_VALUE_MAP.SUCCESS_CODE) {
-          localStorage.setItem(config.LOCAL_STORAGE.USER, JSON.stringify(restResponse[config.RESPONSE.DATA]))
+        if (utils.responseSuccess(response)) {
+          localStorage.setItem(config.LOCAL_STORAGE.USER, JSON.stringify(response.data[config.RESPONSE.DATA]))
           dispatch('setRoutes', {router})
-          resolve(restResponse)
+          resolve(response)
         } else {
-          reject(restResponse)
+          reject(response)
         }
       })
       .catch(error => {
@@ -32,12 +31,11 @@ export const logout = () => {
   return new Promise((resolve, reject) => {
     requestLogout()
       .then(response => {
-        let restResponse = response.data
-        if (restResponse[config.RESPONSE.CODE] === config.RESPONSE.CODE_VALUE_MAP.SUCCESS_CODE) {
+        if (utils.responseSuccess(response)) {
           localStorage.removeItem(config.LOCAL_STORAGE.USER)
-          resolve(restResponse)
+          resolve(response)
         } else {
-          reject(restResponse)
+          reject(response)
         }
       })
       .catch(error => {
