@@ -6,6 +6,8 @@ import 'element-ui/lib/theme-chalk/index.css'
 import MavonEditor from 'mavon-editor'
 import 'mavon-editor/dist/css/index.css'
 import store from './vuex/store'
+import 'bootstrap/dist/css/bootstrap.min.css'
+import 'bootstrap/dist/js/bootstrap.min'
 
 Vue.config.productionTip = false
 
