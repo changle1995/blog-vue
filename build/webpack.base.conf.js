@@ -81,8 +81,9 @@ module.exports = {
   },
   plugins: [
     new webpack.ProvidePlugin({
-      $: "jquery",
-      jQuery: "jquery"
+      $: "jquery",//引用jquery和bootstrap所需
+      jQuery: "jquery",//引用jquery和bootstrap所需
+      'window.Quill': 'quill'//引用quill-resize所需
     })
   ]
 }
