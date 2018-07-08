@@ -4,6 +4,7 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import config from '..'
+import blog from '../../modules/blog/config/router'
 
 Vue.use(VueRouter)
 
@@ -28,6 +29,8 @@ let routes = [
     redirect: "/home"
   }
 ]
+
+routes = routes.concat(blog)
 
 const router = new VueRouter({
   routes
