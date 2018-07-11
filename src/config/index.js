@@ -23,7 +23,10 @@ export default {
 
     // 返回的code值对应的含义
     CODE_VALUE_MAP: {
-      SUCCESS_CODE: '200' // 成功
+      SUCCESS_CODE: '200', // 成功
+      LOGIN_FAILURE_CODE: '401.1', // 登录失败,账号或密码错误
+      UNAUTHORIZED_CODE: '401.2', // 未登录,当前无操作权限
+      ACCESS_DENIED_CODE: '403' // 已登录,当前无操作权限
     }
   },
 
