@@ -4,7 +4,7 @@
     <div class="container">
       <blog-plate-nav/>
       <blog-carousel :carousel="carousel"/>
-      <blog-article-card :articles="articles"/>
+      <blog-article-card v-if="articles" :articles="articles"/>
     </div>
     <blog-footer/>
   </div>
@@ -16,6 +16,8 @@
   import BlogPlateNav from '../components/BlogPlateNav'
   import BlogCarousel from '../components/BlogCarousel'
   import BlogArticleCard from '../components/BlogArticleCard'
+  import * as articleApi from '../modules/blog/api/article'
+  import * as utils from '../utils'
 
   export default {
     name: "home",
@@ -51,44 +53,22 @@
             description: '第三张图'
           }
         ],
-        articles: [
-          {
-            id: 1,
-            title: '标题1',
-            description: '描述1',
-            author: '常乐',
-            createDate: '2018年7月7日18:21:38',
-            img: {src: '/static/logo.png', alt: '替代文字'}
-          },
-          {
-            id: 2,
-            title: '标题2',
-            description: '描述2',
-            author: '常乐',
-            createDate: '2018年7月7日22:05:47',
-            img: {src: '/static/jzc.jpg', alt: '替代文字'}
-          },
-          {
-            id: 3,
-            title: '标题2',
-            description: '描述2',
-            author: '常乐',
-            createDate: '2018年7月7日22:05:47',
-            img: {src: '/static/zxxz.jpg', alt: '替代文字'}
-          },
-          {
-            id: 4,
-            title: '标题2',
-            description: '描述2',
-            author: '常乐',
-            createDate: '2018年7月7日22:05:47',
-            img: {src: '/static/lcw.jpg', alt: '替代文字'}
-          }
-        ]
+        articles: null
       }
+    },
+    methods: {
+      init() {
+        articleApi.get()
+          .then(data => {
+            this.articles = data
+          })
+          .catch(error => {
+            this.$message(utils.createElementMessage(error, 'error'))
+          })
+      }
+    },
+    created() {
+      this.init()
     }
   }
 </script>
-
-<style scoped>
-</style>

@@ -4,15 +4,14 @@
       <div class="card text-center bg-light"
            v-for="(article, index) in articles"
            :key="index">
-        <img v-if="article.img"
+        <img v-if="article.thumbnail"
              class="card-img-top"
-             :alt="article.img.alt"
-             :src="article.img.src">
+             :src="article.thumbnail">
         <blockquote class="blockquote card-body">
           <h4 class="card-title">{{article.title}}</h4>
           <span class="card-text">{{article.description}}</span>
           <footer class="blockquote-footer text-right text-muted">
-            {{article.author}}
+            {{article.user.username}}
           </footer>
           <p class="card-text">
             <small class="text-muted">{{article.createDate}}</small>
@@ -35,7 +34,3 @@
     }
   }
 </script>
-
-<style scoped>
-
-</style>

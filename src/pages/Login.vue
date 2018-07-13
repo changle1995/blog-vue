@@ -38,9 +38,9 @@
     methods: {
       login() {
         this.$store.dispatch('login', {username: this.loginForm.username, password: this.loginForm.password, router: this.$router})
-          .then(() => {
+          .then(data => {
             this.$router.push({path: '/home'})
-          }, () => {
+          }).catch(error => {
             this.error = '账号或密码错误'
             this.loginForm.username = ''
             this.loginForm.password = ''

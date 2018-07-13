@@ -16,7 +16,6 @@
                      class="carousel-item"
                      :class="{active: index === 0}">
           <img class="d-block w-100 m-auto"
-               :alt="item.alt"
                :src="item.src"
                style="cursor: pointer">
           <div class="carousel-caption d-none d-md-block text-secondary">
@@ -48,7 +47,3 @@
     }
   }
 </script>
-
-<style scoped>
-
-</style>

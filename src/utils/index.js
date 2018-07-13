@@ -9,7 +9,7 @@ export const createElementMessage = (message = '默认消息', type = 'warning')
     type: type,
     center: true,
     showClose: true,
-    duration: 1000
+    duration: 2000
   }
 }
 
