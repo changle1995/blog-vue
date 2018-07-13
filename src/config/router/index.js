@@ -5,6 +5,7 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import config from '..'
 import blog from '../../modules/blog/config/router'
+import auth from '../../modules/auth/config/router'
 
 Vue.use(VueRouter)
 
@@ -31,6 +32,8 @@ let routes = [
 ]
 
 routes = routes.concat(blog)
+routes = routes.concat(auth)
+routes = routes.concat([{path: '*', component: (resolve) => require(['../../pages/404'], resolve)}])
 
 const router = new VueRouter({
   routes
@@ -40,12 +43,7 @@ router.beforeEach((to, from, next) => {
   if (to.path === '/login') {
     localStorage.removeItem(config.LOCAL_STORAGE.USER)
   }
-  let user = JSON.parse(localStorage.getItem(config.LOCAL_STORAGE.USER))
-  if (!user && to.path !== '/login') {
-    next({path: '/login'})
-  } else {
-    next()
-  }
+  next()
 })
 
 export default router

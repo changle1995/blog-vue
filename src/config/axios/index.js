@@ -4,6 +4,7 @@
 import axios from 'axios'
 import config from '..'
 import router from '../router'
+import {Notification} from 'element-ui'
 
 axios.defaults.baseURL = config.BASE_URL
 axios.defaults.withCredentials = true
@@ -20,13 +21,18 @@ axios.interceptors.request.use(request => {
 
 axios.interceptors.response.use(response => {
   if (response.data[config.RESPONSE.CODE]) {
-    if (response.data[config.RESPONSE.CODE] === config.RESPONSE.CODE_VALUE_MAP.SUCCESS_CODE) {
+    let code = response.data[config.RESPONSE.CODE]
+    if (code === config.RESPONSE.CODE_VALUE_MAP.SUCCESS_CODE) {
       return response.data[config.RESPONSE.DATA]
-    } else if (response.data[config.RESPONSE.CODE] === config.RESPONSE.CODE_VALUE_MAP.UNAUTHORIZED_CODE) {
+    } else if (code === config.RESPONSE.CODE_VALUE_MAP.UNAUTHORIZED_CODE) {
       router.push('/login')
-    } else {
-      return Promise.reject(response.data)
+    } else if (code === config.RESPONSE.CODE_VALUE_MAP.ACCESS_DENIED_CODE) {
+      Notification({
+        message: '当前无操作权限',
+        type: 'error'
+      })
     }
+    return Promise.reject(response.data)
   }
   return Promise.reject(response)
 }, error => {

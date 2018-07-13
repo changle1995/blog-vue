@@ -7,8 +7,8 @@
 <script>
   export default {
     name: 'app',
-    beforeCreate() {
-      this.$store.dispatch('setRoutes', {router: this.$router}) // 获取动态路由
+    created() {
+      this.$store.dispatch('updateProps', this.$router)
     }
   }
 </script>
