@@ -12,7 +12,11 @@
         <div class="row">
           <!--文章正文-->
           <div class="col-8">
-            <div v-html="article.content"></div>
+            <div class="quill-editor">
+              <div class="ql-snow">
+                <div v-html="article.content" class="ql-editor"></div>
+              </div>
+            </div>
           </div>
 
           <!--其余相关连接-->
