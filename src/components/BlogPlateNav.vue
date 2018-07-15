@@ -5,7 +5,7 @@
                    :key="plate.id"
                    :to="{name: '板块', params: {id: plate.id}}"
                    class="nav-link p-2 text-muted"
-                   :class="{active: $route.params.id === plate.id}">
+                   :class="{active: $route.params.id == plate.id}">
         {{plate.name}}
       </router-link>
     </nav>
