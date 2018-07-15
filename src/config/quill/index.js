@@ -21,6 +21,7 @@ export const editorOption = {
         return config.BASE_URL + 'file/' + res.data
       },
       headers: (xhr) => {
+        xhr.withCredentials = true
         xhr.setRequestHeader(config.REQUEST.HEADER.USER_TOKEN, JSON.parse(localStorage.getItem(config.LOCAL_STORAGE.USER))[config.LOCAL_STORAGE.USER_VALUE.USER_TOKEN])
       }
     },
