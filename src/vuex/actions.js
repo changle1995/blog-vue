@@ -1,6 +1,7 @@
 import config from '../config'
 import * as utils from '../utils'
 import * as session from '../api/session'
+import * as route from '../modules/auth/api/route'
 
 /*
   登录
@@ -37,8 +38,11 @@ export const logout = () => {
 /*
   更新路由参数
  */
-export const updateProps = ({}, {router, userRoutes}) => {
-  router.options.routes.forEach(route => {
-    utils.updateProps(route, userRoutes)
-  })
+export const updateProps = ({}, {router}) => {
+  route.getUserRoutes()
+    .then(data => {
+      router.options.routes.forEach(route => {
+        utils.updateProps(route, data)
+      })
+    })
 }
