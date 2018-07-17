@@ -5,12 +5,11 @@ import * as session from '../api/session'
 /*
   登录
  */
-export const login = ({dispatch}, {username, password, router}) => {
+export const login = ({}, {username, password}) => {
   return new Promise((resolve, reject) => {
     session.login(username, password)
       .then(data => {
         localStorage.setItem(config.LOCAL_STORAGE.USER, JSON.stringify(data))
-        dispatch('updateProps', router)
         resolve(data)
       })
       .catch(error => {
@@ -38,11 +37,8 @@ export const logout = () => {
 /*
   更新路由参数
  */
-export const updateProps = ({}, router) => {
-  let user = JSON.parse(localStorage.getItem(config.LOCAL_STORAGE.USER))
-  if (user) {
-    router.options.routes.forEach(route => {
-      utils.updateProps(route, user[config.LOCAL_STORAGE.USER_VALUE.ROUTES])
-    })
-  }
+export const updateProps = ({}, {router, userRoutes}) => {
+  router.options.routes.forEach(route => {
+    utils.updateProps(route, userRoutes)
+  })
 }

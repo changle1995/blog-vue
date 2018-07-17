@@ -3,7 +3,6 @@
 */
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import config from '..'
 import blog from '../../modules/blog/config/router'
 import auth from '../../modules/auth/config/router'
 
@@ -14,11 +13,6 @@ let routes = [
     name: '登录',
     path: '/login',
     component: (resolve) => require(['../../pages/Login'], resolve)
-  },
-  {
-    name: '找不到页面',
-    path: '/404',
-    component: (resolve) => require(['../../pages/404'], resolve)
   },
   {
     name: '首页',
@@ -37,13 +31,6 @@ routes = routes.concat([{path: '*', component: (resolve) => require(['../../page
 
 const router = new VueRouter({
   routes
-})
-
-router.beforeEach((to, from, next) => {
-  if (to.path === '/login') {
-    localStorage.removeItem(config.LOCAL_STORAGE.USER)
-  }
-  next()
 })
 
 export default router

@@ -37,22 +37,13 @@ export default {
     // user中包含的字段
     USER_VALUE: {
       USER_TOKEN: 'user-token',
-      USERNAME: 'username',
-      ROUTES: 'routes',
       ID: 'id',
+      USERNAME: 'username',
+      AVATAR: 'avatar',
       DESCRIPTION: 'description',
       EMAIL: 'email',
       PHONE_NUMBER: 'phoneNumber',
-      LAST_LOGIN: 'lastLogin',
-
-      // routes中包含的字段
-      ROUTES_VALUE: {
-        NAME: 'name',
-        PROPERTY_NAME: 'propertyName',
-        PROPERTY_VALUE: 'propertyValue',
-        LEVEL: 'level',
-        PARENT_NAME: 'parentName'
-      }
+      LAST_LOGIN: 'lastLogin'
     }
   }
 

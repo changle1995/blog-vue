@@ -1,15 +1,6 @@
 import config from '..'
-import VueQuillEditor from 'vue-quill-editor'
-import 'quill/dist/quill.core.css'
-import 'quill/dist/quill.snow.css'
-import 'quill/dist/quill.bubble.css'
-import {container, ImageExtend, QuillWatch} from 'quill-image-extend-module'
-import {ImageDrop} from 'quill-image-drop-module'
-import ImageResize from 'quill-image-resize-module'
+import {container, QuillWatch} from 'quill-image-extend-module'
 
-VueQuillEditor.Quill.register('modules/ImageExtend', ImageExtend)
-VueQuillEditor.Quill.register('modules/imageDrop', ImageDrop)
-// VueQuillEditor.Quill.register('modules/imageResize', ImageResize)//注册会有警告,只需import即可,在ImageResize最后有自动注册
 
 export const editorOption = {
   modules: {
@@ -38,4 +29,4 @@ export const editorOption = {
   }
 }
 
-export default VueQuillEditor
+export default editorOption

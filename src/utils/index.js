@@ -1,5 +1,3 @@
-import config from '../config'
-
 /*
 * 创建饿了么ui的message对象
 * */
@@ -18,11 +16,13 @@ export const createElementMessage = (message = '默认消息', type = 'warning')
 * */
 export const generateProps = (name, userRoutes) => {
   let props = {}
-  userRoutes.forEach(userRoute => {
-    if (name === userRoute[config.LOCAL_STORAGE.USER_VALUE.ROUTES_VALUE.NAME] && userRoute[config.LOCAL_STORAGE.USER_VALUE.ROUTES_VALUE.PROPERTY_NAME]) {
-      props[userRoute[config.LOCAL_STORAGE.USER_VALUE.ROUTES_VALUE.PROPERTY_NAME]] = userRoute[config.LOCAL_STORAGE.USER_VALUE.ROUTES_VALUE.PROPERTY_VALUE]
-    }
-  })
+  if (userRoutes && userRoutes.length > 0) {
+    userRoutes.forEach(userRoute => {
+      if (name === userRoute['name'] && userRoute['propertyName']) {
+        props[userRoute['propertyName']] = userRoute['propertyValue']
+      }
+    })
+  }
   return props
 }
 
