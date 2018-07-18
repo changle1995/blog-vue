@@ -39,3 +39,19 @@ export const updateProps = (routes, userRoutes) => {
     }
   })
 }
+
+/*
+* 删除路由routes的props中所有属性
+* */
+export const deleteProps = (routes) => {
+  routes.forEach(route => {
+    if (typeof route.props === 'object') {
+      for (let name in route.props) {
+        delete route.props[name]
+      }
+    }
+    if (route.children && route.children.length > 0) {
+      deleteProps(route.children)
+    }
+  })
+}

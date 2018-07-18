@@ -44,3 +44,10 @@ export const updateProps = ({}, {router}) => {
       utils.updateProps(router.options.routes, data)
     })
 }
+
+/*
+  删除所有路由参数
+ */
+export const deleteProps = ({}, {router}) => {
+  utils.deleteProps(router.options.routes)
+}
