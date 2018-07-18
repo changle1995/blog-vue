@@ -41,8 +41,6 @@ export const logout = () => {
 export const updateProps = ({}, {router}) => {
   route.getUserRoutes()
     .then(data => {
-      router.options.routes.forEach(route => {
-        utils.updateProps(route, data)
-      })
+      utils.updateProps(router.options.routes, data)
     })
 }

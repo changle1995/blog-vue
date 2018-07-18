@@ -12,7 +12,7 @@ export const createElementMessage = (message = '默认消息', type = 'warning')
 }
 
 /*
-* 通过路由route的名称name从localStorage中user的routes数组生成对应参数
+* 通过路由route的名称name从user的routes数组生成对应参数
 * */
 export const generateProps = (name, userRoutes) => {
   let props = {}
@@ -27,10 +27,15 @@ export const generateProps = (name, userRoutes) => {
 }
 
 /*
-* 更新路由route的props,根据localStorage中user的routes数组
+* 更新路由routes的props,根据user的routes数组
 * */
-export const updateProps = (route, userRoutes) => {
-  if (typeof route.props === 'object') {
-    Object.assign(route.props, generateProps(route.name, userRoutes))
-  }
+export const updateProps = (routes, userRoutes) => {
+  routes.forEach(route => {
+    if (typeof route.props === 'object') {
+      Object.assign(route.props, generateProps(route.name, userRoutes))
+    }
+    if (route.children && route.children.length > 0) {
+      updateProps(route.children, userRoutes)
+    }
+  })
 }
