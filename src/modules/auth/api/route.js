@@ -16,3 +16,7 @@ export const edit = ({id, name, propertyName, propertyValue, description, level,
 export const del = (id) => {
   return axios.delete('/route/' + id)
 }
+
+export const getUserRoutes = () => {
+  return axios.get('/route/getUserRoutes')
+}
