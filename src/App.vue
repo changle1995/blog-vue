@@ -9,7 +9,7 @@
   export default {
     name: 'app',
     created() {
-      this.$store.dispatch('updateProps', this.$router)
+      this.$store.dispatch('updateProps', {router: this.$router})
     }
   }
 </script>
