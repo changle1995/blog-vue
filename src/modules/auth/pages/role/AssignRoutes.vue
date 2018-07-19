@@ -33,8 +33,6 @@
   import * as roleApi from '../../api/role'
   import * as routeApi from '../../api/route'
   import * as assignRoutes from '../../api/assignRoutes'
-  import config from '../../../../config'
-  import * as util from '../../../../utils'
 
   export default {
     name: "assign-routes",
@@ -62,33 +60,15 @@
       },
       getSelectOptions() {
         roleApi.get()
-          .then(response => {
-            if (util.responseSuccess(response)) {
-              this.select.options = response.data[config.RESPONSE.DATA]
-            } else {
-              this.$router.push('/login')
-              location.reload()
-            }
-          })
-          .catch(error => {
-            this.$router.push('/login')
-            location.reload()
+          .then(data => {
+            this.select.options = data
           })
       },
       getTransferData() {
         routeApi.get()
-          .then(response => {
-            if (util.responseSuccess(response)) {
-              this.transfer.data = response.data[config.RESPONSE.DATA]
-              this.setTransferDataDisabled(true)
-            } else {
-              this.$router.push('/login')
-              location.reload()
-            }
-          })
-          .catch(error => {
-            this.$router.push('/login')
-            location.reload()
+          .then(data => {
+            this.transfer.data = data
+            this.setTransferDataDisabled(true)
           })
       },
       selectChange(roleId) {
@@ -98,19 +78,10 @@
             return role.id === roleId
           }).pop()
           roleApi.get(role.name)
-            .then(response => {
-              if (util.responseSuccess(response)) {
-                this.transfer.rightValue = response.data[config.RESPONSE.DATA][0]['routeSet'].map(route => {
-                  return route.id
-                })
-              } else {
-                this.$router.push('/login')
-                location.reload()
-              }
-            })
-            .catch(error => {
-              this.$router.push('/login')
-              location.reload()
+            .then(data => {
+              this.transfer.rightValue = data[0]['routeSet'].map(route => {
+                return route.id
+              })
             })
         } else {
           this.transfer.rightValue = []
@@ -121,28 +92,8 @@
         if (typeof this.select.selectedValue === 'number') {
           if (direction === 'right') {
             assignRoutes.add(this.select.selectedValue, movedKeys)
-              .then(response => {
-                if (!util.responseSuccess(response)) {
-                  this.$router.push('/login')
-                  location.reload()
-                }
-              })
-              .catch(error => {
-                this.$router.push('/login')
-                location.reload()
-              })
           } else {
             assignRoutes.del(this.select.selectedValue, movedKeys)
-              .then(response => {
-                if (!util.responseSuccess(response)) {
-                  this.$router.push('/login')
-                  location.reload()
-                }
-              })
-              .catch(error => {
-                this.$router.push('/login')
-                location.reload()
-              })
           }
         }
       }

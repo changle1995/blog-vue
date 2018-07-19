@@ -1,10 +1,10 @@
 <template>
   <el-container>
-    <el-aside>
-      <auth-nav-menu></auth-nav-menu>
-    </el-aside>
+    <el-header>
+      <auth-nav-menu/>
+    </el-header>
     <el-main>
-      <router-view></router-view>
+      <router-view/>
     </el-main>
   </el-container>
 </template>
@@ -13,7 +13,7 @@
   import AuthNavMenu from '../components/AuthNavMenu'
 
   export default {
-    name: "route",
+    name: "auth",
     components: {
       AuthNavMenu
     }

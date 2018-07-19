@@ -61,7 +61,6 @@
 
 <script>
   import * as userApi from '../../api/user'
-  import config from '../../../../config'
   import * as util from '../../../../utils'
 
   export default {
@@ -95,19 +94,10 @@
       del(user, showSuccessMessage = true) {
         userApi.del(user.id)
           .then(response => {
-            if (util.responseSuccess(response)) {
-              if (showSuccessMessage) {
-                this.$message(util.createElementMessage('恭喜你，删除成功', 'success'))
-              }
-              this.get(false)
-            } else {
-              this.$router.push('/login')
-              location.reload()
+            if (showSuccessMessage) {
+              this.$message(util.createElementMessage('恭喜你，删除成功', 'success'))
             }
-          })
-          .catch(error => {
-            this.$router.push('/login')
-            location.reload()
+            this.get(false)
           })
       },
       // 分页方法
@@ -125,36 +115,18 @@
         if (this.dialog.addOrEdit === 'edit') {
           userApi.edit(this.dialog.user)
             .then(response => {
-              if (util.responseSuccess(response)) {
-                if (showSuccessMessage) {
-                  this.$message(util.createElementMessage('恭喜你，修改成功', 'success'))
-                }
-                this.get(false)
-              } else {
-                this.$router.push('/login')
-                location.reload()
+              if (showSuccessMessage) {
+                this.$message(util.createElementMessage('恭喜你，修改成功', 'success'))
               }
-            })
-            .catch(error => {
-              this.$router.push('/login')
-              location.reload()
+              this.get(false)
             })
         } else if (this.dialog.addOrEdit === 'add') {
           userApi.add(this.dialog.user)
             .then(response => {
-              if (util.responseSuccess(response)) {
-                if (showSuccessMessage) {
-                  this.$message(util.createElementMessage('恭喜你，添加成功', 'success'))
-                }
-                this.get(false)
-              } else {
-                this.$router.push('/login')
-                location.reload()
+              if (showSuccessMessage) {
+                this.$message(util.createElementMessage('恭喜你，添加成功', 'success'))
               }
-            })
-            .catch(error => {
-              this.$router.push('/login')
-              location.reload()
+              this.get(false)
             })
         }
         this.clearForm()
@@ -162,23 +134,14 @@
       // 获取数据方法
       get(showSuccessMessage = true) {
         userApi.get()
-          .then(response => {
-              if (util.responseSuccess(response)) {
-                this.list = response.data[config.RESPONSE.DATA]
-                if (showSuccessMessage) {
-                  this.$message(util.createElementMessage('获取数据成功', 'success'))
-                }
-                this.handleCurrentChange(this.page = 1)
-              } else {
-                this.$router.push('/login')
-                location.reload()
-              }
+          .then(data => {
+            this.list = data
+            if (showSuccessMessage) {
+              this.$message(util.createElementMessage('获取数据成功', 'success'))
+            }
+            this.handleCurrentChange(this.page = 1)
             }
           )
-          .catch(error => {
-            this.$router.push('/login')
-            location.reload()
-          })
       }
     },
     props: {
