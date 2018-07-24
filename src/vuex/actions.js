@@ -39,10 +39,16 @@ export const logout = () => {
   更新路由参数
  */
 export const updateProps = ({}, {router}) => {
-  route.getUserRoutes()
-    .then(data => {
-      utils.updateProps(router.options.routes, data)
-    })
+  return new Promise((resolve, reject) => {
+    route.getUserRoutes()
+      .then(data => {
+        utils.updateProps(router.options.routes, data)
+        resolve(data)
+      })
+      .catch(error => {
+        reject(error)
+      })
+  })
 }
 
 /*
