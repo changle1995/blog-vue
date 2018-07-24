@@ -1,7 +1,7 @@
 <template>
   <header role="banner" class="blog-header">
     <div class="blog-header-inner">
-      <nav role="navigation" class="navbar navbar-expand navbar-light">
+      <nav role="navigation" class="navbar navbar-expand-lg navbar-light">
         <router-link class="navbar-brand" :to="brand.to">
           <img :src="brand.src" width="40" height="40">{{brand.content}}
         </router-link>
@@ -26,10 +26,7 @@
               </svg>
             </a>
           </form>
-          <ul class="nav navbar-nav" v-if="userInfo.user">
-            <li class="nav-item">
-              <router-link class="nav-link" :to="{name: '文章编辑'}">编写文章</router-link>
-            </li>
+          <ul class="navbar-nav" v-if="userInfo.user">
             <li class="nav-item dropdown">
               <router-link class="nav-link" to="" role="button" data-toggle="dropdown">
                 <img class="rounded-circle"
@@ -45,7 +42,7 @@
               </div>
             </li>
           </ul>
-          <ul class="nav navbar-nav" v-else>
+          <ul class="navbar-nav" v-else>
             <li class="nav-item">
               <router-link class="nav-link" :to="{name: '注册'}">注册</router-link>
             </li>
@@ -75,8 +72,7 @@
         },
         navItems: [
           {content: '发现', to: {name: '首页'}},
-          {content: '话题', to: {name: '首页'}},
-          {content: '备用', to: {name: '首页'}}
+          {content: '话题', to: {name: '首页'}}
         ],
         userInfo: {
           user: null,
@@ -116,6 +112,7 @@
   .blog-header {
     background: #fff;
     box-shadow: 0 1px 3px rgba(26, 26, 26, .1);
+    font-size: 16px;
   }
 
   .blog-header a {
