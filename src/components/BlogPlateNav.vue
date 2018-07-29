@@ -4,9 +4,8 @@
       <li class="nav-item" v-for="plate in plates" :key="plate.id">
         <router-link :to="{name: '板块', params: {id: plate.id}}"
                      class="nav-link text-dark"
-                     :class="{active: $route.params.id == plate.id}">
-          {{plate.name}}
-        </router-link>
+                     :class="{active: $route.params.id == plate.id}"
+                     v-text="plate.name"/>
       </li>
     </ul>
     <ul class="navbar-nav">

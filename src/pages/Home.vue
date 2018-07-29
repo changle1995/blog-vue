@@ -90,7 +90,7 @@
       init() {
         articleApi.get()
           .then(data => {
-            this.articles = data
+            this.articles = data.content
           })
           .catch(error => {
             this.$message(utils.createElementMessage(error, 'error'))

@@ -2,7 +2,7 @@
   <div>
     <!--头部-->
     <blog-header/>
-    <div class="jumbotron">
+    <div class="jumbotron my-auto">
       <div class="container">
         <div class="page-header">
           <h1 class="display-4">{{article.title}}</h1>
