@@ -1,5 +1,5 @@
 const DEV_URL = 'http://localhost:10080' + '/blog/'
-const PRO_URL = location.protocol + '//' + location.host + '/blog/'
+const PRO_URL = 'http://localhost:8008' + '/blog/'
 
 let baseUrl = process.env.NODE_ENV === 'production' ? PRO_URL : DEV_URL
 
