@@ -79,9 +79,6 @@
       del(role, showSuccessMessage = true) {
         roleApi.del(role.id)
           .then(response => {
-            if (showSuccessMessage) {
-              this.$message(util.createElementMessage('恭喜你，删除成功', 'success'))
-            }
             this.get(false)
           })
       },
@@ -100,17 +97,11 @@
         if (this.dialog.addOrEdit === 'edit') {
           roleApi.edit(this.dialog.role)
             .then(response => {
-              if (showSuccessMessage) {
-                this.$message(util.createElementMessage('恭喜你，修改成功', 'success'))
-              }
               this.get(false)
             })
         } else if (this.dialog.addOrEdit === 'add') {
           roleApi.add(this.dialog.role)
             .then(response => {
-              if (showSuccessMessage) {
-                this.$message(util.createElementMessage('恭喜你，添加成功', 'success'))
-              }
               this.get(false)
             })
         }
@@ -121,9 +112,6 @@
         roleApi.get()
           .then(data => {
             this.list = data
-            if (showSuccessMessage) {
-              this.$message(util.createElementMessage('获取数据成功', 'success'))
-            }
             this.handleCurrentChange(this.page = 1)
             }
           )

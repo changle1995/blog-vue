@@ -61,7 +61,6 @@
 
 <script>
   import * as userApi from '../../api/user'
-  import * as util from '../../../../utils'
 
   export default {
     name: "display",
@@ -94,9 +93,6 @@
       del(user, showSuccessMessage = true) {
         userApi.del(user.id)
           .then(response => {
-            if (showSuccessMessage) {
-              this.$message(util.createElementMessage('恭喜你，删除成功', 'success'))
-            }
             this.get(false)
           })
       },
@@ -115,17 +111,11 @@
         if (this.dialog.addOrEdit === 'edit') {
           userApi.edit(this.dialog.user)
             .then(response => {
-              if (showSuccessMessage) {
-                this.$message(util.createElementMessage('恭喜你，修改成功', 'success'))
-              }
               this.get(false)
             })
         } else if (this.dialog.addOrEdit === 'add') {
           userApi.add(this.dialog.user)
             .then(response => {
-              if (showSuccessMessage) {
-                this.$message(util.createElementMessage('恭喜你，添加成功', 'success'))
-              }
               this.get(false)
             })
         }
@@ -136,9 +126,6 @@
         userApi.get()
           .then(data => {
             this.list = data
-            if (showSuccessMessage) {
-              this.$message(util.createElementMessage('获取数据成功', 'success'))
-            }
             this.handleCurrentChange(this.page = 1)
             }
           )

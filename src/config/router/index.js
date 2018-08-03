@@ -20,6 +20,11 @@ let routes = [
     component: (resolve) => require(['../../pages/Home'], resolve)
   },
   {
+    name: '注册',
+    path: '/register',
+    component: (resolve) => require(['../../pages/Register'], resolve)
+  },
+  {
     path: "/",
     redirect: "/home"
   }

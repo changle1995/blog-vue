@@ -99,9 +99,6 @@
       del(route, showSuccessMessage = true) {
         routeApi.del(route.id)
           .then(response => {
-            if (showSuccessMessage) {
-              this.$message(util.createElementMessage('恭喜你，删除成功', 'success'))
-            }
             this.get(false)
           })
       },
@@ -120,17 +117,11 @@
         if (this.dialog.addOrEdit === 'edit') {
           routeApi.edit(this.dialog.route)
             .then(response => {
-              if (showSuccessMessage) {
-                this.$message(util.createElementMessage('恭喜你，修改成功', 'success'))
-              }
               this.get(false)
             })
         } else if (this.dialog.addOrEdit === 'add') {
           routeApi.add(this.dialog.route)
             .then(response => {
-              if (showSuccessMessage) {
-                this.$message(util.createElementMessage('恭喜你，添加成功', 'success'))
-              }
               this.get(false)
             })
         }
@@ -141,9 +132,6 @@
         routeApi.get()
           .then(data => {
             this.list = data
-            if (showSuccessMessage) {
-              this.$message(util.createElementMessage('获取数据成功', 'success'))
-            }
             this.handleCurrentChange(this.page = 1)
             }
           )
