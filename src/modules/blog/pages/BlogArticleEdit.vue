@@ -3,8 +3,8 @@
     <!--头部-->
     <blog-header/>
     <!--相关内容编辑区-->
-    <form class="container my-5">
-      <div class="row mb-5">
+    <form class="container my-3">
+      <div class="row">
         <div class="col-8">
           <div class="form-group">
             <input type="text" class="form-control" id="title" placeholder="标题" v-model="article.title">
@@ -20,7 +20,7 @@
                       v-model="article.description"></textarea>
           </div>
           <div class="form-group">
-            <quill-editor v-model="article.content" :options="editorOption" style="height: 400px;"/>
+            <quill-editor v-model="article.content" :options="editorOption" style="background-color: white;"/>
           </div>
         </div>
         <div class="col-4">
@@ -44,10 +44,10 @@
               </ul>
             </div>
           </div>
+          <div class="text-center my-2">
+            <button class="btn btn-success" @click.prevent="addOrEdit">提交</button>
+          </div>
         </div>
-      </div>
-      <div class="text-center pt-5">
-        <button class="btn btn-success mt-3" @click.prevent="addOrEdit">提交</button>
       </div>
     </form>
     <!--尾部-->
@@ -61,8 +61,8 @@
   import config from '../../../config'
   import {editorOption} from '../../../config/quill'
   import * as fileApi from '../../../api/file'
-  import * as plateApi from '../api/plate'
-  import * as articleApi from '../api/article'
+  import {getAllPlates} from '../api/plate'
+  import {addArticle, editArticle} from '../api/article'
 
   export default {
     name: "blog-article-edit",
@@ -79,7 +79,7 @@
           title: '',
           description: '',
           content: '',
-          userId: JSON.parse(localStorage.getItem(config.LOCAL_STORAGE.USER))[config.LOCAL_STORAGE.USER_VALUE.ID],
+          userId: '',
           plateId: '',
           thumbnail: '',
           tag: []
@@ -88,7 +88,7 @@
       }
     },
     methods: {
-      selectThumbnail(e){
+      selectThumbnail(e) {
         let file = e.target.files[0]
         if (file) {
           fileApi.upload(file)
@@ -99,7 +99,7 @@
               console.log(error)
             })
         } else {
-          this.article.thumbnail = '/static/add_img.png'
+          this.article.thumbnail = ''
         }
       },
       addTag() {
@@ -108,18 +108,17 @@
       },
       addOrEdit() {
         if (this.article.id) {
-          articleApi.edit(this.article)
+          editArticle(this.article)
             .then(data => {
-
+              this.$router.push({name: '文章', params: {id: data.id}})
             })
             .catch(error => {
               console.log(error)
             })
         } else {
-          articleApi.add(this.article)
+          addArticle(this.article)
             .then(data => {
-              console.log(data)
-              this.$router.push({name: '文章详情', params: {id: data.id}})
+              this.$router.push({name: '文章', params: {id: data.id}})
             })
             .catch(error => {
               console.log(error)
@@ -127,13 +126,19 @@
         }
       },
       init() {
-        plateApi.get()
-          .then(data => {
-            this.plateOptions = data
-          })
-          .catch(error => {
-            console.log(error)
-          })
+        let user = JSON.parse(localStorage.getItem(config.LOCAL_STORAGE.USER))
+        if (!user) {
+          this.$router.replace({name: '登录'})
+        } else {
+          this.article.userId = user[config.LOCAL_STORAGE.USER_VALUE.ID]
+          getAllPlates()
+            .then(data => {
+              this.plateOptions = data
+            })
+            .catch(error => {
+              console.log(error)
+            })
+        }
       }
     },
     created() {
@@ -141,6 +146,3 @@
     }
   }
 </script>
-
-<style scoped>
-</style>
