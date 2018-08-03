@@ -1,7 +1,7 @@
 import config from '../config'
 import * as utils from '../utils'
 import * as session from '../api/session'
-import * as route from '../modules/auth/api/route'
+import {getUserRoutes} from '../modules/auth/api/route'
 
 /*
   登录
@@ -40,7 +40,7 @@ export const logout = () => {
  */
 export const updateProps = ({}, {router}) => {
   return new Promise((resolve, reject) => {
-    route.getUserRoutes()
+    getUserRoutes()
       .then(data => {
         utils.updateProps(router.options.routes, data)
         resolve(data)

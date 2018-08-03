@@ -3,28 +3,41 @@
     <!--头部-->
     <blog-header/>
     <div class="container">
-      <!--板块导航列表-->
-      <blog-plate-nav/>
-      <!--文章列表-->
-      <div class="my-5" v-if="articles">
-        <div class="card-columns">
-          <div class="card text-center bg-light"
-               v-for="(article, index) in articles"
-               :key="index">
-            <img v-if="article.thumbnail"
-                 class="card-img-top"
-                 :src="article.thumbnail">
-            <blockquote class="blockquote card-body">
-              <h4 class="card-title">{{article.title}}</h4>
-              <span class="card-text">{{article.description}}</span>
-              <footer class="blockquote-footer text-right text-muted">
-                {{article.user.username}}
-              </footer>
-              <p class="card-text">
-                <small class="text-muted">{{article.createDate}}</small>
-              </p>
-              <router-link :to="{name: '文章详情', params: {id: article.id}}" class="btn btn-secondary">阅读详情</router-link>
-            </blockquote>
+      <div class="row">
+        <div class="col-9">
+          <!--板块导航列表-->
+          <div class="card my-2">
+            <blog-plate-navigation/>
+          </div>
+          <!--文章列表-->
+          <div class="mb-3" v-for="(article, index) in articles" :key="index">
+            <blog-article-card :article="article"/>
+          </div>
+        </div>
+        <div class="col-3">
+          <div class="card mt-2 mb-3">
+            <div class="card-body">
+              <h4 class="card-title">热门文章</h4>
+              <ul class="card-text list-unstyled">
+                <li class="text-secondary" style="cursor: pointer">asdadasd</li>
+                <li class="text-secondary" style="cursor: pointer">asdadasd</li>
+                <li class="text-secondary" style="cursor: pointer">asdadasd</li>
+                <li class="text-secondary" style="cursor: pointer">asdadasd</li>
+                <li class="text-secondary" style="cursor: pointer">asdadasd</li>
+              </ul>
+            </div>
+          </div>
+          <div class="card mt-2 mb-3">
+            <div class="card-body">
+              <h4 class="card-title">热门用户</h4>
+              <ul class="card-text list-unstyled">
+                <li class="text-secondary" style="cursor: pointer">asdadasd</li>
+                <li class="text-secondary" style="cursor: pointer">asdadasd</li>
+                <li class="text-secondary" style="cursor: pointer">asdadasd</li>
+                <li class="text-secondary" style="cursor: pointer">asdadasd</li>
+                <li class="text-secondary" style="cursor: pointer">asdadasd</li>
+              </ul>
+            </div>
           </div>
         </div>
       </div>
@@ -35,18 +48,19 @@
 </template>
 
 <script>
-  import BlogHeader from '../../../components/BlogHeader'
-  import BlogFooter from '../../../components/BlogFooter'
-  import BlogPlateNav from '../../../components/BlogPlateNav'
+  import BlogHeader from '../components/BlogHeader'
+  import BlogFooter from '../components/BlogFooter'
+  import BlogPlateNavigation from '../components/BlogPlateNavigation'
+  import BlogArticleCard from '../components/BlogArticleCard'
   import * as articleApi from '../api/article'
-  import * as utils from '../../../utils'
 
   export default {
     name: "blog-plate",
     components: {
       BlogHeader,
-      BlogPlateNav,
-      BlogFooter
+      BlogFooter,
+      BlogPlateNavigation,
+      BlogArticleCard
     },
     data() {
       return {
@@ -55,12 +69,12 @@
     },
     methods: {
       init() {
-        articleApi.get({plateId: this.$route.params.id})
+        articleApi.getPageableArticlesByPlateId(this.$route.params.id)
           .then(data => {
-            this.articles = data
+            this.articles = data.content
           })
           .catch(error => {
-            this.$message(utils.createElementMessage(error, 'error'))
+            console.log(error)
           })
       }
     },

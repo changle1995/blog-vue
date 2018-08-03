@@ -1,7 +1,6 @@
 import config from '..'
 import {container, QuillWatch} from 'quill-image-extend-module'
 
-
 export const editorOption = {
   modules: {
     ImageExtend: {

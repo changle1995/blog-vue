@@ -57,7 +57,7 @@
 </template>
 
 <script>
-  import config from '../config'
+  import config from '../../../config/index'
 
   export default {
     name: "blog-header",
@@ -67,7 +67,7 @@
           to: {
             name: '首页'
           },
-          src: require('../assets/logo.png'),
+          src: require('../../../assets/logo.png'),
           content: '博客系统'
         },
         navItems: [
@@ -76,7 +76,7 @@
         ],
         userInfo: {
           user: null,
-          defaultAvatar: require('../assets/logo.png')
+          defaultAvatar: require('../../../assets/logo.png')
         }
       }
     },

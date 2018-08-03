@@ -17,11 +17,10 @@
 </template>
 
 <script>
-  import * as plateApi from '../modules/blog/api/plate'
-  import * as utils from '../utils'
+  import {getAllPlates} from '../api/plate'
 
   export default {
-    name: "blog-plate-nav",
+    name: "blog-plate-navigation",
     data() {
       return {
         plates: []
@@ -29,12 +28,12 @@
     },
     methods: {
       getPlates() {
-        plateApi.get()
+        getAllPlates()
           .then(data => {
             this.plates = data
           })
           .catch(error => {
-            this.$message(utils.createElementMessage(error, 'error'))
+            console.log(error)
           })
       }
     },

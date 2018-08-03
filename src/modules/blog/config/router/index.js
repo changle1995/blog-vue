@@ -5,7 +5,7 @@ let routes = [
     component: (resolve) => require(['../../pages/BlogPlate'], resolve)
   },
   {
-    name: '文章详情',
+    name: '文章',
     path: '/article/:id',
     component: (resolve) => require(['../../pages/BlogArticle'], resolve)
   },

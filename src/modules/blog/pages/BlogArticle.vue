@@ -2,7 +2,7 @@
   <div>
     <!--头部-->
     <blog-header/>
-    <div class="jumbotron my-auto">
+    <div class="jumbotron my-auto" v-if="article">
       <div class="container">
         <div class="page-header">
           <h1 class="display-4">{{article.title}}</h1>
@@ -62,10 +62,9 @@
 </template>
 
 <script>
-  import BlogHeader from '../../../components/BlogHeader'
-  import BlogFooter from '../../../components/BlogFooter'
-  import * as articleApi from '../api/article'
-  import * as utils from '../../../utils'
+  import BlogHeader from '../components/BlogHeader'
+  import BlogFooter from '../components/BlogFooter'
+  import {getArticleById} from '../api/article'
 
   export default {
     name: "blog-article",
@@ -75,17 +74,17 @@
     },
     data() {
       return {
-        article: {}
+        article: null
       }
     },
     methods: {
       init() {
-        articleApi.get({id: this.$route.params.id})
+        getArticleById(this.$route.params.id)
           .then(data => {
-            this.article = data[0]
+            this.article = data
           })
           .catch(error => {
-            this.$message(utils.createElementMessage(error, 'error'))
+            console.log(error)
           })
       }
     },

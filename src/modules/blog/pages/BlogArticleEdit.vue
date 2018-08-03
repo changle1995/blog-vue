@@ -56,8 +56,8 @@
 </template>
 
 <script>
-  import BlogHeader from '../../../components/BlogHeader'
-  import BlogFooter from '../../../components/BlogFooter'
+  import BlogHeader from '../components/BlogHeader'
+  import BlogFooter from '../components/BlogFooter'
   import config from '../../../config'
   import {editorOption} from '../../../config/quill'
   import * as fileApi from '../../../api/file'
